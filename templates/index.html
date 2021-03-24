@@ -16,7 +16,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/script.js" defer></script>
+    <script type="text/javascript" src='{{ url_for('static', filename="script.js") }}' defer></script>
 </head>
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
@@ -40,18 +40,20 @@
         <a class="btn btn-outline-primary" href="#" role="button">Next</a>
 
         <table class="table table-bordered table-striped table-dark">
-              <thead>
+            <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Diameter</th>
-                  <th scope="col">Climate</th>
-                  <th scope="col">Terrain</th>
-                  <th scope="col">Surface Water Percentage</th>
-                  <th scope="col">Population</th>
-                  <th scope="col">Residents</th>
-                  <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Diameter</th>
+                    <th scope="col">Climate</th>
+                    <th scope="col">Terrain</th>
+                    <th scope="col">Surface Water Percentage</th>
+                    <th scope="col">Population</th>
+                    <th scope="col">Residents</th>
+                    <th scope="col"></th>
                 </tr>
-              </thead>
+            </thead>
+            <tbody></tbody>
+
         </table>
     </div>
 </body>
