@@ -1,10 +1,16 @@
 window.onload = function()  {
-    fetch('https://swapi.dev/api/planets/')
-    .then((response) => response.json())
-    .then((data) => {
-        console.log(data.results)
-        addPlanets(data.results)
-    })
+    window.currentPage = 1
+    getPlanets(currentPage)
+    nextPage()
+    previousPage()
+
+    function getPlanets(currentPage) {
+        fetch(`https://swapi.dev/api/planets/?page=${currentPage}`)
+        .then((response) => response.json())
+        .then((data) => {
+            addPlanets(data.results)
+        })
+    }
 
 
     function addPlanets(planets) {
@@ -14,7 +20,7 @@ window.onload = function()  {
             let name = document.createElement('td')
             name.innerText = planet.name
             let diameter = document.createElement('td')
-            diameter.innerText = parseInt(planet.diameter).toLocaleString() + " km"
+            diameter.innerText = planet.diameter !== "unknown" ? parseInt(planet.diameter).toLocaleString() + " km":planet.diameter
             let climate = document.createElement('td')
             climate.innerText = planet.climate
             let terrain = document.createElement('td')
@@ -28,9 +34,38 @@ window.onload = function()  {
             row.append(name, diameter, climate, terrain, surfaceWater, population, residents)
             table.appendChild(row)
         }
+    }
+    
 
+    function previousPage() {
+        let button = document.getElementById('previous')
+        button.onclick = function() {
+            if (window.currentPage > 1) {
+                window.currentPage -= window.currentPage !== 1 ? 1:0
+                let table = document.querySelector('tbody')
+                while (table.firstChild) {
+                    table.firstChild.remove()
+                }
+                getPlanets(currentPage)
+            }
 
+        }
+    }
+        
 
+    function nextPage() {
+        let button = document.getElementById('next')
+        button.onclick = function() {
+            if (window.currentPage < 6) {
+                window.currentPage += window.currentPage !== 6 ? 1:0
+                let table = document.querySelector('tbody')
+                while (table.firstChild) {
+                    table.firstChild.remove()
+                }
+                getPlanets(currentPage)
+            }
+
+        }
     }
 }
 
