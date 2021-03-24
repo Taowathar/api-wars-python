@@ -39,7 +39,8 @@ window.onload = function()  {
                 button.innerText = planet.residents.length + " resident(s)";
                 button.classList.add('residents-button');
                 button.onclick = function() {
-                location.href = '#';
+                    getResidents(planet.residents)
+                    $('#myModal').modal('show')
                 }
                 residents.appendChild(button);
             }
@@ -81,6 +82,25 @@ window.onload = function()  {
             };
         };
     };
+
+
+    function getResidents(residents) {
+        console.log(residents);
+        for (let resident of residents) {
+            let http = new XMLHttpRequest();
+            http.onreadystatechange = function() {
+                if (http.readyState == 4 && http.status == 200) {
+                    console.log(JSON.parse(http.response))
+                }
+            }
+            http.open("GET", resident, true);
+            http.send();
+
+            // $.get(resident, function(data){
+            //     console.log(data)
+            // })
+        }
+    }
 }
 
 
