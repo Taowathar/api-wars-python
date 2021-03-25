@@ -13,7 +13,9 @@
                 <a class="nav-item nav-link" href="#">Voting Statistics</a>
                 <a class="nav-item nav-link" href="/registration">Registration</a>
                 <a class="nav-item nav-link" href="/login">Login</a>
-                <a class="nav-item nav-link" href="#">Logout</a>
+                {% if session['username'] %}
+                    <a class="nav-item nav-link" href="/logout">Logout</a>
+                {% endif %}
             </div>
         </div>
         {% if session['username'] %}

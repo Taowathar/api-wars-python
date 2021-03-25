@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, session
+from flask import Flask, render_template, request, redirect, flash, session, url_for
 import os
 import util
 import data_manager
@@ -47,6 +47,13 @@ def login():
             error = 'Wrong username or password.'
             return render_template('login.html', error=error)
     return render_template('login.html')
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    flash('You were just logged out')
+    return redirect(url_for('main'))
 
 
 if __name__ == '__main__':
