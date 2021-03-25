@@ -15,3 +15,12 @@ def get_usernames(cursor: RealDictCursor) -> list:
     query = "SELECT username FROM users"
     cursor.execute(query)
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_password(cursor: RealDictCursor, username) -> list:
+    query = """
+        SELECT password FROM users
+        WHERE username = %(name)s"""
+    cursor.execute(query, {'name': username})
+    return cursor.fetchone()

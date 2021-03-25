@@ -32,6 +32,22 @@ def registration():
             return render_template('registration.html', error=error)
     return render_template('registration.html')
     
-    
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if util.verify_password(password, data_manager.get_password(username)['password']):
+            session['username'] = username
+            flash('You were just logged in')
+            print(session['username'])
+            return redirect('/')
+        else:
+            error = 'Wrong username or password.'
+            return render_template('login.html', error=error)
+    return render_template('login.html')
+
+
 if __name__ == '__main__':
     app.run()
