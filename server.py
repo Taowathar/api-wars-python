@@ -1,6 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, session
+import os
+import util
+
 
 app = Flask(__name__)
+app.secret_key = os.urandom(16)
 
 
 @app.route('/')
