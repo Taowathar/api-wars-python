@@ -73,3 +73,9 @@ table {
     font-size: 25px;
     text-align: center;
 }
+
+#signed {
+    font-size: 20px;
+    margin-top: 20px;
+    color: seagreen;
+}
