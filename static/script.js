@@ -49,6 +49,7 @@ window.onload = function()  {
             let vote = document.createElement('td');
             let voteButton = document.createElement('button');
             voteButton.classList.add('vote-button');
+            voteButton.innerText = "Vote"
             vote.appendChild(voteButton);
             row.append(name, diameter, climate, terrain, surfaceWater, population, residents, vote);
             table.appendChild(row);
