@@ -16,6 +16,11 @@ def main():
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':
+        users = data_manager.get_usernames()
+        for user in users:
+            if user['username'] == request.form['username']:
+                error = 'Username already exists, please choose another one!'
+                return render_template('registration.html', error=error)
         if request.form['password'] and request.form['password']:
             password = util.hash_password(request.form['password'])
             user = {'username': request.form['password'], 'password': password}
