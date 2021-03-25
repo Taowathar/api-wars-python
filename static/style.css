@@ -49,10 +49,9 @@ table {
     margin: 20px;
 }
 
-/*.modal {*/
-/*    position:relative;*/
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
-/*    height: 60%;*/
-/*    width: 80%;*/
-/*}*/
+.modal-content button {
+    width: 80px;
+    margin-left: 700px;
+    margin-bottom: 20px;
+    background-color: seagreen;
+}
