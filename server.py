@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, flash, session
 import os
 import util
 import data_manager
@@ -21,11 +21,12 @@ def registration():
             if user['username'] == request.form['username']:
                 error = 'Username already exists, please choose another one!'
                 return render_template('registration.html', error=error)
-        if request.form['password'] and request.form['password']:
+        if request.form['username'] and request.form['password']:
             password = util.hash_password(request.form['password'])
-            user = {'username': request.form['password'], 'password': password}
+            user = {'username': request.form['username'], 'password': password}
             data_manager.add_new_user(user)
-            return redirect('/')
+            flash('Successful registration. Log in to continue.')
+            return redirect('/login')
         else:
             error = 'Please, fill in both fields.'
             return render_template('registration.html', error=error)

@@ -67,3 +67,9 @@ table {
     font-size: 30px;
     margin-left: 30px;
 }
+
+#flash {
+    margin-top: 50px;
+    font-size: 25px;
+    text-align: center;
+}
