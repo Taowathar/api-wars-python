@@ -42,6 +42,7 @@ window.onload = function()  {
                     addModalTitle(planet.name)
                     getResidents(planet.residents);
                     $('#myModal').modal('show');
+                    closeModal();
                 }
                 residents.appendChild(button);
             }
@@ -143,6 +144,15 @@ window.onload = function()  {
         title.innerText = "Residents of " + planetName;
         modal.prepend(title);
     }
+
+
+
+    function closeModal() {
+    let closeIcon = document.querySelector(".close");
+    closeIcon.addEventListener("click", function(e){
+        $('#myModal').modal('hide');
+    });
+}
 }
 
 
