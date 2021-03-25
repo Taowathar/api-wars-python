@@ -2,7 +2,6 @@ body {
     background-color: darkslategrey;
 }
 
-
 .main-container {
     margin-left: auto;
     margin-right: auto;
@@ -34,8 +33,6 @@ table {
     margin-right: auto;
 }
 
-
-
 .close {
 	position: absolute;
 	top: 20px;
@@ -47,7 +44,6 @@ table {
 	color: #333;
 }
 
-
 .modal-content h2 {
     margin: 20px;
 }
@@ -57,4 +53,17 @@ table {
     margin-left: 700px;
     margin-bottom: 20px;
     background-color: seagreen;
+}
+
+.registration {
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+
+}
+
+.back {
+    font-size: 30px;
+    margin-left: 30px;
 }
