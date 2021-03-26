@@ -46,12 +46,15 @@ window.onload = function()  {
                 }
                 residents.appendChild(button);
             }
-            let vote = document.createElement('td');
-            let voteButton = document.createElement('button');
-            voteButton.classList.add('vote-button');
-            voteButton.innerText = "Vote"
-            vote.appendChild(voteButton);
-            row.append(name, diameter, climate, terrain, surfaceWater, population, residents, vote);
+            if (typeof username !== 'undefined') {
+                let vote = document.createElement('td');
+                let voteButton = document.createElement('button');
+                voteButton.classList.add('vote-button');
+                voteButton.innerText = "Vote"
+                vote.appendChild(voteButton);
+                row.append(name, diameter, climate, terrain, surfaceWater, population, residents, vote);
+            }
+            else {row.append(name, diameter, climate, terrain, surfaceWater, population, residents);}
             table.appendChild(row);
         };
     };

@@ -68,5 +68,9 @@
             </div>
         </div>
     </div>
-
+    {% if session['username'] %}
+        <script type="text/javascript">
+            let username = '{{ session['username'] }}'
+        </script>
+    {% endif %}
 {% endblock %}
