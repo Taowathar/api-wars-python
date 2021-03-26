@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, flash, session, url_for
+from flask import Flask, render_template, request, redirect, flash, session, url_for, jsonify
 import os
 import util
 import data_manager
@@ -53,6 +53,16 @@ def logout():
     session.pop('username', None)
     flash('You were just logged out')
     return redirect(url_for('main'))
+
+
+@app.route('/vote', methods=['POST'])
+def voting():
+    data = request.get_json()
+    time = util.get_submission_time()
+    user_id = data_manager.get_user_id(data['user'])['id']
+    vote = {'planet_id': data['planetId'], 'planet_name': data['name'], 'user_id': user_id, 'submission_time': time}
+    data_manager.add_vote(vote)
+    return 'thanks'
 
 
 if __name__ == '__main__':

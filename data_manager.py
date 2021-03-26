@@ -24,3 +24,18 @@ def get_password(cursor: RealDictCursor, username) -> list:
         WHERE username = %(name)s"""
     cursor.execute(query, {'name': username})
     return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_user_id(cursor: RealDictCursor, username) -> list:
+    query = "SELECT id FROM users WHERE username = %(name)s"
+    cursor.execute(query, {'name': username})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
+def add_vote(cursor: RealDictCursor, vote) -> list:
+    query = """
+        INSERT INTO planet_votes (planet_id, planet_name, user_id, submission_time) 
+        VALUES (%(planet_id)s, %(planet_name)s, %(user_id)s, %(submission_time)s)"""
+    cursor.execute(query, vote)

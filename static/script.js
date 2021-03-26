@@ -1,5 +1,6 @@
 window.onload = function()  {
     window.currentPage = 1;
+    window.planetList = {}
     getPlanets(currentPage);
     nextPage();
     previousPage();
@@ -16,6 +17,7 @@ window.onload = function()  {
     function addPlanets(planets) {
         let table = document.querySelector('tbody');
         for (let planet of planets) {
+            planetList[planet.name] = planet.url.split('/')[5]
             let row = document.createElement('tr');
             let name = document.createElement('td');
             name.innerText = planet.name;
@@ -50,6 +52,7 @@ window.onload = function()  {
                 let vote = document.createElement('td');
                 let voteButton = document.createElement('button');
                 voteButton.classList.add('vote-button');
+                voteButton.id = planet.name
                 voteButton.innerText = "Vote"
                 vote.appendChild(voteButton);
                 row.append(name, diameter, climate, terrain, surfaceWater, population, residents, vote);
@@ -57,14 +60,14 @@ window.onload = function()  {
             else {row.append(name, diameter, climate, terrain, surfaceWater, population, residents);}
             table.appendChild(row);
         };
+        if (typeof username !== 'undefined') {vote(username)}
     };
     
 
     function previousPage() {
         let button = document.getElementById('previous');
         button.onclick = function() {
-            let flash = document.getElementById('flash')
-            if (flash !== null) {flash.remove()}
+            removeFlash()
             if (window.currentPage > 1) {
                 window.currentPage -= window.currentPage !== 1 ? 1:0;
                 let table = document.querySelector('tbody');
@@ -78,8 +81,7 @@ window.onload = function()  {
     function nextPage() {
         let button = document.getElementById('next');
         button.onclick = function() {
-            let flash = document.getElementById('flash')
-            if (flash !== null) {flash.remove()}
+            removeFlash()
             if (window.currentPage < 6) {
                 window.currentPage += window.currentPage !== 6 ? 1:0;
                 let table = document.querySelector('tbody');
@@ -160,7 +162,37 @@ window.onload = function()  {
     closeIcon.addEventListener("click", function(e){
         $('#myModal').modal('hide');
     });
-}
+    }
+
+
+    function removeFlash() {
+        let flash = document.getElementById('flash')
+        if (flash !== null) {flash.remove()}
+    }
+
+    function vote(username) {
+        let buttons = document.querySelectorAll('.vote-button');
+        for (let button of buttons) {
+
+            // button.onclick = function() {
+            // }
+
+            $(button).click(function() {
+                let data = {
+                    user: username,
+                    name: this.id,
+                    planetId: planetList[this.id]
+                }
+                fetch('/vote', {
+                    method: 'POST',
+                    credentials: "include",
+                    body: JSON.stringify(data),
+                    cache: "no-cache",
+                    headers: new Headers ({"content-type": "application/json"})
+                })
+            });
+        };
+    };
 }
 
 
