@@ -41,7 +41,6 @@ def login():
         if util.verify_password(password, data_manager.get_password(username)['password']):
             session['username'] = username
             flash('You were just logged in')
-            print(session['username'])
             return redirect('/')
         else:
             error = 'Wrong username or password.'

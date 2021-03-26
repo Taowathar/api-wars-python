@@ -63,6 +63,8 @@ window.onload = function()  {
     function previousPage() {
         let button = document.getElementById('previous');
         button.onclick = function() {
+            let flash = document.getElementById('flash')
+            if (flash !== null) {flash.remove()}
             if (window.currentPage > 1) {
                 window.currentPage -= window.currentPage !== 1 ? 1:0;
                 let table = document.querySelector('tbody');
@@ -76,6 +78,8 @@ window.onload = function()  {
     function nextPage() {
         let button = document.getElementById('next');
         button.onclick = function() {
+            let flash = document.getElementById('flash')
+            if (flash !== null) {flash.remove()}
             if (window.currentPage < 6) {
                 window.currentPage += window.currentPage !== 6 ? 1:0;
                 let table = document.querySelector('tbody');
