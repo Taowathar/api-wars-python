@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/">Planet List</a>
-                <a class="nav-item nav-link" href="#">Voting Statistics</a>
+                <a id="voteStat" class="nav-item nav-link" href="#">Voting Statistics</a>
                 <a class="nav-item nav-link" href="/registration">Registration</a>
                 <a class="nav-item nav-link" href="/login">Login</a>
                 {% if session['username'] %}
@@ -45,7 +45,7 @@
         </table>
     </div>
 
-    <div id="myModal" class="modal fade bd-example-modal-lg residents" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div id="myModal" class="modal fade bd-example-modal-lg residents" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <a class="close" href="#">×</a>
@@ -63,6 +63,24 @@
                         </tr>
                     </thead>
                     <tbody class="residents-table"></tbody>
+                </table>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <div id="votingModal" class="modal fade bd-example-modal-lg residents" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <h2>Voting statistic</h2>
+                <a class="close" href="#">×</a>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Planet name</th>
+                            <th scope="col">Received votes</th>
+                        </tr>
+                    </thead>
+                    <tbody class="vote-table"></tbody>
                 </table>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>

@@ -4,6 +4,8 @@ window.onload = function()  {
     getPlanets(currentPage);
     nextPage();
     previousPage();
+    openVoteModal();
+    closeModal();
 
     function getPlanets(currentPage) {
         fetch(`https://swapi.dev/api/planets/?page=${currentPage}`)
@@ -44,7 +46,6 @@ window.onload = function()  {
                     addModalTitle(planet.name)
                     getResidents(planet.residents);
                     $('#myModal').modal('show');
-                    closeModal();
                 }
                 residents.appendChild(button);
             }
@@ -158,10 +159,14 @@ window.onload = function()  {
 
 
     function closeModal() {
-    let closeIcon = document.querySelector(".close");
-    closeIcon.addEventListener("click", function(e){
-        $('#myModal').modal('hide');
-    });
+        let closeIcons = document.querySelectorAll(".close");
+        for (let closeIcon of closeIcons) {
+            closeIcon.addEventListener("click", function(e){
+            console.log('hey')
+            $('#myModal').modal('hide');
+            $('#votingModal').modal('hide');
+        });
+        }
     }
 
 
@@ -193,6 +198,14 @@ window.onload = function()  {
             });
         };
     };
+
+
+    function openVoteModal() {
+        let openLink = document.querySelector("#voteStat");
+        openLink.addEventListener("click", function(e){
+            $('#votingModal').modal('show');
+        });
+    }
 }
 
 
