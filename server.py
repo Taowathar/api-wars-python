@@ -65,5 +65,11 @@ def voting():
     return 'thanks'
 
 
+@app.route('/get_votes')
+def get_votes():
+    votes = data_manager.get_votes()
+    return jsonify(votes)
+
+
 if __name__ == '__main__':
     app.run()

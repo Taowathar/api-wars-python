@@ -9,11 +9,11 @@ window.onload = function()  {
 
     function getPlanets(currentPage) {
         fetch(`https://swapi.dev/api/planets/?page=${currentPage}`)
-        .then((response) => response.json())
-        .then((data) => {
-            addPlanets(data.results);
-        })
-    };
+            .then((response) => response.json())
+            .then((data) => {
+                addPlanets(data.results);
+            })
+    }
 
 
     function addPlanets(planets) {
@@ -60,9 +60,9 @@ window.onload = function()  {
             }
             else {row.append(name, diameter, climate, terrain, surfaceWater, population, residents);}
             table.appendChild(row);
-        };
+        }
         if (typeof username !== 'undefined') {vote(username)}
-    };
+    }
     
 
     function previousPage() {
@@ -74,9 +74,9 @@ window.onload = function()  {
                 let table = document.querySelector('tbody');
                 clearTable(table)
                 getPlanets(currentPage);
-            };
+            }
         };
-    };
+    }
         
 
     function nextPage() {
@@ -88,9 +88,9 @@ window.onload = function()  {
                 let table = document.querySelector('tbody');
                 clearTable(table)
                 getPlanets(currentPage);
-            };
+            }
         };
-    };
+    }
 
 
     function getResidents(residents) {
@@ -144,7 +144,7 @@ window.onload = function()  {
     function clearTable(table) {
         while (table.firstChild) {
             table.firstChild.remove();
-        };
+        }
     }
 
 
@@ -196,15 +196,40 @@ window.onload = function()  {
                     headers: new Headers ({"content-type": "application/json"})
                 })
             });
-        };
-    };
+        }
+    }
 
 
     function openVoteModal() {
         let openLink = document.querySelector("#voteStat");
         openLink.addEventListener("click", function(e){
+            getVotes()
             $('#votingModal').modal('show');
         });
+    }
+
+
+    function getVotes() {
+        fetch('/get_votes')
+            .then((response) => response.json())
+            .then((data) => {
+                addVotes(data)
+            })
+    }
+
+
+    function addVotes(votes) {
+        let table = document.querySelector('.vote-table')
+        clearTable(table)
+        for (vote of votes) {
+            let row = document.createElement('tr')
+            let planetName = document.createElement('td')
+            planetName.innerText = vote.planet_name
+            let voteNumber = document.createElement('td')
+            voteNumber.innerText = vote.count
+            row.append(planetName, voteNumber)
+            table.appendChild(row)
+        }
     }
 }
 

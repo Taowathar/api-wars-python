@@ -39,3 +39,13 @@ def add_vote(cursor: RealDictCursor, vote) -> list:
         INSERT INTO planet_votes (planet_id, planet_name, user_id, submission_time) 
         VALUES (%(planet_id)s, %(planet_name)s, %(user_id)s, %(submission_time)s)"""
     cursor.execute(query, vote)
+
+
+@connection.connection_handler
+def get_votes(cursor: RealDictCursor) -> list:
+    query = """
+        SELECT planet_name, COUNT(id) FROM planet_votes
+        GROUP BY planet_name
+        ORDER BY planet_name"""
+    cursor.execute(query)
+    return cursor.fetchall()
