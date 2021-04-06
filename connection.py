@@ -20,6 +20,10 @@ def get_connection_string():
         raise KeyError('Some necessary environment variable(s) are not defined')
 
 
+DATABASE_URL = get_connection_string()
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+
 def open_database():
     try:
         connection_string = get_connection_string()
