@@ -1,6 +1,8 @@
 import os
 import psycopg2
 import psycopg2.extras
+# import urllib
+# from urllib.parse import urlparse
 
 
 def get_connection_string():
@@ -21,7 +23,20 @@ def get_connection_string():
 
 
 DATABASE_URL = get_connection_string()
+# DATABASE_URL = os.environ['DATABASE_URL']
+
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+# urllib.parse.uses_netloc.append('postgres')
+# url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+#
+# connection = psycopg2.connect(
+#     database=url.path[1:],
+#     user=url.username,
+#     password=url.password,
+#     host=url.hostname,
+#     port=url.port
+# )
 
 
 def open_database():
