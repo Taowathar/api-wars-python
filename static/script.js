@@ -97,16 +97,6 @@ window.onload = function()  {
         let table = document.querySelector('.residents-table');
         clearTable(table)
         for (let resident of residents) {
-
-            // let http = new XMLHttpRequest();
-            // http.onreadystatechange = function() {
-            //     if (http.readyState == 4 && http.status == 200) {
-            //         console.log(JSON.parse(http.response))
-            //     }
-            // }
-            // http.open("GET", resident, true);
-            // http.send();
-
             fetch(resident)
             .then((response) => response.json())
             .then((data) => {
